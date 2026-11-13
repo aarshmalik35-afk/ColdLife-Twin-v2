@@ -1,109 +1,227 @@
-# ColdLife Twin
+# ColdChain Twin
+### AI-Powered Digital Twin for Cold-Chain Logistics Monitoring
 
-## GitHub repository
+**ColdChain Twin** is a software-based Digital Twin prototype designed to simulate, visualize and monitor cold-chain logistics operations through an interactive dashboard.
 
-https://github.com/anshgupta652006-ux/coldlife-twin
+The platform brings fleet monitoring, shipment temperature tracking, refrigeration-unit health and operational risk identification into a centralized interface. It demonstrates how digital twin concepts and data-driven monitoring can support better visibility and decision-making in temperature-sensitive supply chains.
 
-AI-powered pharmaceutical cold-chain digital twin built with React, Vite, Supabase, Leaflet, Recharts and Gemini.
+---
 
-## Features
+## Project Overview
 
-- Live fleet map with fuel and cooling telemetry
-- Critical shipment detection from temperature, survival, risk and quarantine state
-- Live ETA and remaining distance
-- Compact chain of custody
-- Driver and vehicle health monitoring
-- Supabase realtime-ready backend
-- Controlled cooling/quarantine RPC actions
-- Fast Gemini prediction through a Supabase Edge Function
-- Local fallback demo data, so the UI still renders if optional tables are unavailable
+Cold-chain logistics plays a critical role in transporting temperature-sensitive products such as food, pharmaceuticals and other perishable goods.
 
-## Architecture
+Monitoring vehicle conditions, shipment temperatures, refrigeration performance and delivery status across a logistics network can be challenging.
 
-`React/Vite -> Supabase Database/RPC -> Supabase Edge Function -> Gemini API`
+ColdChain Twin addresses this challenge through a simulated digital logistics environment that provides a unified view of fleet and shipment operations.
 
-The Gemini API key is **never** stored in the frontend.
+The application uses simulated operational data to represent changing logistics conditions, identify potential risks and present recommendations through an interactive dashboard.
 
-## Local setup
+## Key Features
+
+### Fleet Monitoring
+- Monitor simulated fleet operations and vehicle status.
+- Visualize vehicle locations through an interactive map.
+- Track fuel levels and operational indicators.
+
+### Shipment Monitoring
+- View shipment information and delivery status.
+- Monitor simulated shipment temperature conditions.
+- Identify shipments potentially exposed to temperature-related risks.
+
+### Cooling Unit Health
+- Monitor simulated refrigeration-unit health.
+- Visualize cooling-system operating conditions.
+- Highlight potential equipment-related issues.
+
+### Intelligent Risk Insights
+- Evaluate operational conditions using configured risk rules.
+- Generate alerts for potential shipment and equipment issues.
+- Display recommendations to support shipment prioritization and operational decisions.
+
+### Analytics Dashboard
+- Visualize fleet and shipment information.
+- Display operational metrics through interactive charts.
+- Provide a consolidated overview of logistics conditions.
+
+### Digital Twin Simulation
+- Represent a virtual logistics environment.
+- Simulate changes in vehicle, shipment and cooling-unit conditions.
+- Observe how changing operational states affect risk indicators.
+
+---
+
+## Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React.js |
+| Build Tool | Vite |
+| Backend / Database | Supabase |
+| Programming Language | Python |
+| Frontend Hosting | GitHub Pages |
+| Mapping | Leaflet, OpenStreetMap |
+| Data Visualization | Recharts |
+| API Integration | Supabase Client / REST APIs |
+| Version Control | Git and GitHub |
+
+---
+
+## System Architecture
+
+ColdChain Twin follows a modular web application architecture.
+
+1. **Frontend Layer:** React and Vite provide the interactive dashboard and visualization components.
+2. **Backend and Data Layer:** Supabase provides hosted database and API functionality for application data.
+3. **Simulation Layer:** Python utilities support simulation or data preparation according to the implemented workflow.
+4. **Visualization Layer:** Leaflet and Recharts present fleet locations, operational metrics and shipment information.
+5. **Deployment Layer:** GitHub Pages hosts the compiled frontend application.
+
+The frontend communicates with Supabase to retrieve and display permitted application data.
+
+> Note: GitHub Pages is used for static frontend hosting. It does not execute Python server-side processes.
+
+---
+
+## Application Preview
+
+Add screenshots of your actual application below.
+
+| Dashboard Overview | Fleet Monitoring |
+|---|---|
+| Add dashboard screenshot | Add fleet map screenshot |
+
+| Shipment Monitoring | Analytics and Alerts |
+|---|---|
+| Add shipment screenshot | Add alerts screenshot |
+
+---
+
+## Installation and Setup
+
+### Prerequisites
+
+Make sure the following tools are installed:
+
+- Node.js and npm
+- Python 3.x (if running the Python utilities)
+- Git
+- A Supabase project
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+cd YOUR_REPOSITORY
+```
+
+### 2. Install frontend dependencies
 
 ```bash
 npm install
-cp .env.example .env
+```
+
+### 3. Configure Supabase
+
+Create a `.env` file in the frontend project root:
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_publishable_or_anon_key
+```
+
+Configure the corresponding environment variables in your deployment settings as well.
+
+Ensure that database access policies are configured appropriately. Never expose a Supabase service-role key in frontend code.
+
+### 4. Run the development server
+
+```bash
 npm run dev
 ```
 
-Set in `.env`:
+Open the local URL displayed by Vite in your browser.
 
-```env
-VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
-VITE_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLISHABLE_OR_ANON_KEY
-```
-
-Never put a Supabase `service_role` key or Gemini API key in Vite environment variables.
-
-## Supabase backend
-
-1. Create a Supabase project.
-2. Open **SQL Editor**.
-3. Run `supabase/schema.sql`.
-4. Install/login to Supabase CLI:
+### 5. Build for production
 
 ```bash
-npx supabase login
-npx supabase link --project-ref YOUR_PROJECT_REF
+npm run build
 ```
 
-5. Store Gemini securely:
+The generated production files can be deployed through the configured GitHub Pages workflow.
+
+### 6. Python utilities
+
+If the repository includes Python simulation or data-preparation scripts, install their dependencies using the supplied requirements file:
 
 ```bash
-npx supabase secrets set GEMINI_API_KEY=YOUR_GEMINI_KEY
+pip install -r requirements.txt
 ```
 
-6. Deploy the Edge Function:
+Run the appropriate Python entry point documented in the repository.
 
-```bash
-npx supabase functions deploy gemini-predict
-```
+*Update this section with the actual script name and execution command before publishing.*
 
-## Deploy to Vercel
+---
 
-Import this repository into Vercel. Add these project environment variables:
+## Deployment
 
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_PUBLISHABLE_KEY`
+The frontend is designed for deployment using **GitHub Pages**.
 
-Build command: `npm run build`  
-Output: `dist`
+Deployment workflow:
 
-## Deploy to Netlify
+1. Build the React application using Vite.
+2. Generate the production-ready static assets.
+3. Publish the build output through GitHub Pages.
+4. Configure the Supabase environment variables and ensure the database policies permit the intended frontend operations.
 
-Import the repository and add the same two environment variables. `netlify.toml` is included.
+**Hosted Application:** [Add GitHub Pages URL]
 
-## Deploy to GitHub Pages
+---
 
-The included workflow `.github/workflows/deploy-pages.yml` builds and deploys on every push to `main`.
+## Future Enhancements
 
-In GitHub repository **Settings -> Secrets and variables -> Actions**, add:
+Potential future development includes:
 
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_PUBLISHABLE_KEY`
+- Real-time temperature and humidity monitoring through IoT sensors.
+- GPS-based vehicle tracking.
+- Predictive analytics for shipment temperature excursions.
+- Refrigeration-unit fault prediction.
+- Traffic-aware route optimization.
+- Historical logistics data analysis.
+- Cloud-based processing and scalable telemetry ingestion.
 
-Then in **Settings -> Pages**, choose **GitHub Actions** as the source.
+---
 
-## Create/push the repo from a Mac
+## Current Scope and Limitations
 
-If GitHub CLI is installed and authenticated:
+ColdChain Twin is currently a software-based prototype that uses simulated fleet and shipment data.
 
-```bash
-git init
-git add .
-git commit -m "Initial ColdLife Twin deployment"
-git branch -M main
-gh repo create coldlife-twin --public --source=. --remote=origin --push
-```
+- No physical IoT sensors are currently required.
+- Vehicle locations represent simulated positions rather than verified live GPS data.
+- Temperature readings represent simulated shipment conditions.
+- Risk insights are based on configured rules and conditions, not a validated predictive machine-learning model.
+- Real-world deployment would require integration with actual logistics, sensor and tracking infrastructure.
 
-Use `--private` instead of `--public` if preferred.
+---
 
-## Security
+## Project Objective
 
-This repository contains no API secrets. `.env` is gitignored. Gemini runs behind a Supabase Edge Function and reads `GEMINI_API_KEY` from Supabase secrets.
+The objective of ColdChain Twin is to demonstrate how Digital Twin technology can be applied to cold-chain logistics by combining operational simulation, centralized monitoring, data visualization and risk identification within a unified web platform.
+
+The project establishes a foundation for exploring intelligent and data-driven logistics management.
+
+---
+
+## Developer
+
+**[Your Name]**
+
+B.Tech – Computer Science and Engineering  
+IILM University, Gurugram
+
+GitHub: [Your GitHub Profile](https://github.com/YOUR_USERNAME)
+
+---
+
+*ColdChain Twin — Bringing visibility and intelligence to temperature-sensitive logistics.*
